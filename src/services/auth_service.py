@@ -1,3 +1,4 @@
+import os  # ← falta esto
 import firebase_admin
 from firebase_admin import credentials, auth
 from fastapi import HTTPException
@@ -13,9 +14,13 @@ def _initialize_firebase() -> None:
     if firebase_admin._apps:
         return
 
-    cred = credentials.Certificate(
-        "proyectoauthvotos-firebase-adminsdk-fbsvc-1fe4a6883c.json"
-    )
+    cred = credentials.Certificate({
+        "type": "service_account",
+        "project_id": os.getenv("FIREBASE_PROJECT_ID"),
+        "private_key": os.getenv("FIREBASE_PRIVATE_KEY").replace("\\n", "\n"),
+        "client_email": os.getenv("FIREBASE_CLIENT_EMAIL"),
+        "token_uri": "https://oauth2.googleapis.com/token",
+    })
 
     firebase_admin.initialize_app(cred)
     print("[OK] Firebase Admin inicializado con proyecto CORRECTO")
@@ -61,7 +66,6 @@ def get_current_user(
     firebase_uid: str = decoded.get("uid", "")
     nombre: str = decoded.get("name", "")
 
-    # Buscar usuario existente
     usuario = usuario_repository.get_by_firebase_uid(db, firebase_uid)
 
     if not usuario:

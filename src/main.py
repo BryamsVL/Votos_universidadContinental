@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware  # 🔥 IMPORTANTE
 from src.database import engine, Base
-
+load_dotenv()
 # Importar modelos para que SQLAlchemy los registre antes de create_all
 import src.models.usuario_model  # noqa: F401
 import src.models.candidato_model  # noqa: F401
@@ -14,7 +14,6 @@ from src.apis import usuario_router, candidato_router, voto_router, auth_router
 from src.services.auth_service import _initialize_firebase
 
 
-load_dotenv()
 @asynccontextmanager
 
 async def lifespan(app: FastAPI):

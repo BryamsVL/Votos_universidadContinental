@@ -6,5 +6,11 @@ services:
     startCommand: "uvicorn src.main:app --host 0.0.0.0 --port $PORT"
     envVars:
       - key: DATABASE_URL
-        sync: false  # Configurar manualmente en el dashboard de Render
+        sync: false
+      - key: FIREBASE_PROJECT_ID
+        sync: false
+      - key: FIREBASE_PRIVATE_KEY
+        sync: false
+      - key: FIREBASE_CLIENT_EMAIL
+        sync: false
     autoDeploy: true
