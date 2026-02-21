@@ -1,0 +1,35 @@
+# Entorno virtual
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Entorno y secretos
+.env
+*.env
+serviceAccountKey.json
+*firebase-adminsdk*.json
+*.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+
+# Archivos de diagnóstico y scripts locales
+error.txt
+add_column.py
+check_db.py
+fix_db.py
+test_get_all.py

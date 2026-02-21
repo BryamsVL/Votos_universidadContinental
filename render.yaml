@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: votacion-backend
+    runtime: python
+    buildCommand: "pip install uv && uv sync"
+    startCommand: "uvicorn src.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DATABASE_URL
+        sync: false  # Configurar manualmente en el dashboard de Render
+    autoDeploy: true
